@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 
-from flask import Flask, redirect, abort
+from flask import Flask, redirect, abort, render_template
+from flask_bootstrap import Bootstrap
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 if __name__ == '__main__':
     app.run(debug=True)
 
 @app.route('/')
 def index():
-    return '<h1>Hello World!</h1>'
+    return render_template('index.html')
 
 @app.route('/bassets')
 def bassets():
@@ -16,7 +18,7 @@ def bassets():
 
 @app.route('/user/<name>')
 def user(name):
-    return '<h1>Hello, {}!</h1>'.format(name)
+    return render_template('user.html', name=name)
 
 @app.route('/users/<id>')
 def get_user(id):
